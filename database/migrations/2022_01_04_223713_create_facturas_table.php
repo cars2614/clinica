@@ -43,6 +43,24 @@ class CreateFacturasTable extends Migration
   
        
         });
+            /*
+            SE IMPLEMENTA EL TRIGGER PARA QUE CUANDO SE RECIBA UNA FACTURA SE 
+            GUARDE AUTOMATICAMENTE EN TA TABLE detalles_estados Y LLEVAR UN CONTROL
+            */
+            DB::unprepared('
+            
+            CREATE TRIGGER recibido
+            AFTER INSERT ON facturas
+            FOR EACH ROW
+            BEGIN
+                SET @recibido = (SELECT MAX(facturas.id) FROM facturas);
+                INSERT INTO detalles_estados (facturas_id, estados_id)
+                SELECT @recibido, 1 FROM facturas WHERE facturas.id = @recibido;
+            END
+            ');
+
+
+        
     }
 
     /**
@@ -52,6 +70,11 @@ class CreateFacturasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facturas');
+
+       // DB::unprepared('DROP TRIGGER recibido');
+
+        Schema::dropIfExists('facturas');       
+
+        
     }
 }

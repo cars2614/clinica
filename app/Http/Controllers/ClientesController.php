@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 
-
-
 use App\Models\Clientes;
 use Faker\Core\Number;
 use Illuminate\Http\Request;

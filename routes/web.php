@@ -7,6 +7,7 @@ use App\Http\Controllers\CuadernoPagoController;
 use App\Http\Controllers\DetallesEstadoController;
 use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\InformesController;
 use App\Http\Controllers\PrestamosController;
 //use App\Models\DetallesEstado;
 
@@ -40,3 +41,6 @@ route::resource('cuadernoPago', CuadernoPagoController::class );
 
 /* rutas cuaderno detalles estados */
 route::resource('detallesEstados', DetallesEstadoController::class);
+
+/* rutas informes */
+route::resource('informes', InformesController::class);

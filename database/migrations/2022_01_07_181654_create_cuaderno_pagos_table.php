@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCuadernoPagosTable extends Migration
@@ -29,6 +30,26 @@ class CreateCuadernoPagosTable extends Migration
 
             
         });
+
+            /*
+            SE REALIZA ESTE TRIGGER PARA LLEVAR EL CONTROL DE LOS DETALLES DE LA FACTURA Y ASI 
+            PODER LLEVAR UN CONTROL MAS EXACTO
+            */
+            DB::unprepared('
+        
+            CREATE TRIGGER realizado 
+            AFTER INSERT ON cuaderno_pagos
+            FOR EACH ROW 
+            BEGIN
+                SET @realizado = (SELECT cuaderno_pagos.facturas_id 
+                FROM cuaderno_pagos 
+		    	WHERE id =  (SELECT MAX(id) FROM cuaderno_pagos) );
+        
+                INSERT INTO detalles_estados (facturas_id, estados_id)
+                SELECT @realizado, 2 FROM facturas WHERE facturas.id = @realizado;
+    
+            END
+            ');
     }
 
 /* 
@@ -41,6 +62,10 @@ class CreateCuadernoPagosTable extends Migration
      */
     public function down()
     {
+
+        //DB::unprepared('DROP TRIGGER realizado');
+             
         Schema::dropIfExists('cuaderno_pagos');
+        
     }
 }
