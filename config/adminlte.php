@@ -271,7 +271,7 @@ return [
                 [
                     'text' => 'Informe General',
                     'icon' => 'fas fa-fw fa-book-open',
-                    'url' => '#'
+                    'url' => '/informes'
                 ],
                 [
                     'text' => 'Informe Cliente',

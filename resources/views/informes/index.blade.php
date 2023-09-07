@@ -14,11 +14,11 @@
 @section('content_header')
 
     <!--
-    <h2>Facturar</h2>
+                                    <h2>Facturar</h2>
 
-    <a href="{{ url('/facturas/create') }}" class="btn btn-info">Crear Nueva Factura</a>
+                                    <a href="{{ url('/facturas/create') }}" class="btn btn-info">Crear Nueva Factura</a>
 
-    -->
+                                    -->
 
 @stop
 
@@ -27,13 +27,42 @@
     <div id="container">
         <div id="row">
 
-            <form class="form-inline">
-                <label class="sr-only" for="">Name</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="" placeholder="">
+            <form action="{{ url('/informes') }}" method="post">
 
-                
-                <button type="submit" class="btn btn-primary mb-2">Consultar</button>
+                <div>
+                    <h2>Consulta de Paquetes Por Fechas</h2>
+                </div>
+                <br>
+
+
+                <div class="form-group row mb-0">
+
+                    <div class="mb-3 col-4">
+                        <label class="form-label" for="">Fecha Inicial</label>
+                        <input type="date" class="form-control form-control-lg" id="" placeholder="">
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label class="form-label" for="">Fecha Final</label>
+                        <input type="date" class="form-control form-control-lg" id="" placeholder="">
+                        
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <br>
+
+                        <button type="submit" class="btn btn-group-lg primary mb-6 col-12">Consultar</button>
+
+                    </div>
+
+                </div>
+
+
+
             </form>
+
+
+
 
         </div>
 
