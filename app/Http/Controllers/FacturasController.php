@@ -23,12 +23,13 @@ class FacturasController extends Controller
 
         /* $factura = Facturas::all(); */
 
-        $factura = DB::select('SELECT f.id, f.fecha_factura, 
-        c.nombre_cliente,f.num_prendas,f.descripcion_factura,f.fec_entrega,f.precio_factura,f.abono_factura
-        FROM facturas f 
-        INNER JOIN clientes c 
-        on f.clientes_id=c.id                  
-        ORDER BY id DESC');
+        $factura = DB::select('SELECT f.id, f.fecha_factura, c.nombre_cliente, f.num_prendas, f.descripcion_factura, f.fec_entrega, f.precio_factura, f.abono_factura, e.estado
+            FROM facturas f 
+            INNER JOIN clientes c on f.clientes_id = c.id 
+            INNER JOIN detalles_estados d_e ON f.id = d_e.facturas_id
+            INNER JOIN estados e ON e.id = d_e.estados_id
+            WHERE d_e.estados_id = (SELECT MAX(estados_id) FROM detalles_estados WHERE facturas_id = f.id)
+            ORDER BY f.id DESC;');
 
         $datoFactura = array('lista_factura'=>$factura);
         return response()->view('facturas/index', $datoFactura );
@@ -67,7 +68,8 @@ class FacturasController extends Controller
 
         $request->validate([
 
-            //'fecha_factura'       => 'required',
+            //'fecha_factura'     => 'required',
+
             'clientes_id'         => 'required',
             'num_prendas'         => 'required|min:1',
             'descripcion_factura' => 'required',

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Controller\ClientController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\CuadernoPagoController;
 use App\Http\Controllers\DetallesEstadoController;
@@ -17,30 +16,30 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-/* Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- */
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
+/* ->middleware('auth') SE UTILIZA PARA DENEGAR EL ACCESO SI NO ESTA LOGEADO*/
 
 
 /* ruta de clientes */
 /* mostramos todas las rutas del crud */
-Route::resource('clientes', ClientesController::class);
+Route::resource('clientes', ClientesController::class)->middleware('auth');
 
 /* rutas de facturas */
-Route::resource('facturas',  FacturasController::class);
+Route::resource('facturas',  FacturasController::class)->middleware('auth');
 
 /* rutas Emplado */
-route::resource('empleados', EmpleadoController::class );
+route::resource('empleados', EmpleadoController::class)->middleware('auth');
 
 /* rutas de prestamos */
-route::resource('prestamos', PrestamosController::class );
+route::resource('prestamos', PrestamosController::class)->middleware('auth');
 
 /* rutas cuaderno empleados */
-route::resource('cuadernoPago', CuadernoPagoController::class );
+route::resource('cuadernoPago', CuadernoPagoController::class)->middleware('auth');
 
 /* rutas cuaderno detalles estados */
-route::resource('detallesEstados', DetallesEstadoController::class);
+route::resource('detallesEstados', DetallesEstadoController::class)->middleware('auth');
 
 /* rutas informes */
-route::resource('informes', InformesController::class);
+route::resource('informes', InformesController::class)->middleware('auth');

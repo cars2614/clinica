@@ -51,12 +51,11 @@ class ClientesController extends Controller
 
 
 
+     /* La funcion store: es la que recepciona la informacion enviada 
+     desde el formulario  */
     public function store(Request $request)
     {
-        //
-        /* $datosClientes = request()->all(); */
-
-
+       
         /* validamos que los campos telefono y nombre sean agregados desde el backend */
        
         $request->validate([
@@ -70,9 +69,6 @@ class ClientesController extends Controller
         base de datos
         */
         $datosClientes = request()->except('_token');
-
-       
-
 
 
         /* tomamos el modelo  'Clientes' y le decimos que inserte 

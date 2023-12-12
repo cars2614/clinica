@@ -32,7 +32,7 @@ class CreateFacturasTable extends Migration
             $table->datetime('fec_entrega');
             $table->integer('precio_factura');
             $table->integer('abono_factura');  
-           //$table->foreignId('estado_id')->constrained('estados');        
+                
            
             /* $table-> */
             $table->timestamps();

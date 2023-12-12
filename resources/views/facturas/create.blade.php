@@ -39,7 +39,7 @@
                         <select name="clientes_id" id="clientes_id" class="form-control form-control-lg">
                             <option value="">Seleccione Cliente</option>
                             @foreach ($lista_clientes as $cliente)
-                                <option value="{{ $cliente->id }}"> {{ $cliente->telefono_cliente }} {{ $cliente->nombre_cliente }}
+                                <option value= "{{ $cliente->id }}" > {{ $cliente->telefono_cliente }} {{ $cliente->nombre_cliente }}
                                 </option>
                             @endforeach
                         </select>

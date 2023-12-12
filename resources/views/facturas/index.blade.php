@@ -50,6 +50,7 @@
                             <td>{{ $factura->fec_entrega }}</td>
                             <td>{{ $factura->precio_factura }}</td>
                             <td>{{ $factura->abono_factura }}</td>
+                            <td>{{ $factura->estado }}</td>
                                                       
                             
                             
