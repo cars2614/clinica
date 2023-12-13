@@ -66,18 +66,20 @@ class CuadernoPagoController extends Controller
 
         //la consulta si funciona
         
-        $factura = DB::select('SELECT facturas.id,clientes.nombre_cliente, 
-                 detalles_estados.facturas_id, estados.estado, detalles_estados.fecha
-                 
-                 FROM detalles_estados
-                 INNER JOIN estados
-                 ON detalles_estados.estados_id = estados.id
-                 INNER JOIN facturas
-                 ON detalles_estados.facturas_id = facturas.id
-                 INNER JOIN clientes
-                 ON clientes.id = facturas.clientes_id           
-                 GROUP BY  facturas.id,clientes.nombre_cliente, 
-                 detalles_estados.facturas_id, estados.estado, detalles_estados.fecha  '); 
+        $factura = DB::select('SELECT facturas.id, clientes.nombre_cliente, detalles_estados.facturas_id, estados.estado, detalles_estados.fecha
+            FROM detalles_estados
+            INNER JOIN estados ON detalles_estados.estados_id = estados.id
+            INNER JOIN facturas ON detalles_estados.facturas_id = facturas.id
+            INNER JOIN clientes ON clientes.id = facturas.clientes_id
+            WHERE estados.id = 1
+            AND NOT EXISTS (
+                SELECT 1
+                FROM detalles_estados as de2
+                INNER JOIN estados as e2 ON de2.estados_id = e2.id
+                WHERE de2.facturas_id = facturas.id
+                AND e2.id > 1
+  )
+                GROUP BY facturas.id, clientes.nombre_cliente, detalles_estados.facturas_id, estados.estado, detalles_estados.fecha;'); 
 
 
         return response()->view('cuadernoPago.create', ['empleados' => $empleado, 'facturas' => $factura] );

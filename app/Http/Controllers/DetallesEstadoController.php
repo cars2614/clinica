@@ -18,14 +18,17 @@ class DetallesEstadoController extends Controller
     public function index()
     {
         $factura = DB::select(
-            'SELECT f.id, c.nombre_cliente        
+            'SELECT f.id, c.nombre_cliente  
         FROM facturas f         
         INNER JOIN clientes c 
         on f.clientes_id=c.id
         INNER JOIN detalles_estados d_e
         ON f.id = d_e.facturas_id
-        WHERE d_e.estados_id >= 2
-        GROUP BY f.id, c.nombre_cliente'
+        INNER JOIN estados e 
+        ON d_e.estados_id = e.id
+        WHERE d_e.estados_id  = (SELECT MAX(estados_id) FROM detalles_estados WHERE facturas_id = f.id)     
+        AND d_e.estados_id =2
+        GROUP BY f.id, c.nombre_cliente;'
         );
 
         $estado = DB::select(
@@ -51,7 +54,7 @@ class DetallesEstadoController extends Controller
        return response()->view('detallesEstados.index', 
        ['facturas' => $factura, 'estados' => $estado, 'todasLasacturas'=> $todasLasacturas] );
 
-        // return "bienvenido";
+       
         
         
     }
