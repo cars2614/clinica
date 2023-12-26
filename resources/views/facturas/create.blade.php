@@ -3,13 +3,16 @@
 @section('title', 'Facturas')
 
 @section('content_header')
-
-    <div class="container-header">
+<div class="container">
+ <div class="container-header">
 
         <h2>Facturar</h2> <br>
         <a href="{{ url('/facturas') }}" class="btn btn-info m-2">Total Facturas Del Dia</a>
         <a href="{{ url('/clientes/create') }}" class="btn btn-info m-2">Agregar Cliente Nuevo</a>
     </div>
+</div>
+
+   
 
 
 @stop

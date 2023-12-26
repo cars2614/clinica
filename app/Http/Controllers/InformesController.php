@@ -3,10 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Informes;
+
+
+use App\Models\Facturas;
+use App\Models\Clientes;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\FacturasController;
+use Illuminate\Support\Facades\DB;
 
 class InformesController extends Controller
 {
+
+
+    public function consultaGeneral(Request $request)
+    {
+
+
+        $consultaG = new Informes;
+
+        $fechaInicio = $consultaG->fechaInicio = $request->fechaInicio;
+        $fechaFin = $consultaG->fechaFin = $request->fechaFin;
+
+        /* dd($fechaInicio, $fechaFin);  Compruebo que las variables lleguen*/
+
+
+        /*  SELECT * FROM facturas as f 
+INNER JOIN detalles_estados as d_e
+ON f.id = d_e.facturas_id 
+INNER JOIN estados AS es
+ON es.id = d_e.estados_id
+INNER JOIN clientes as c 
+ON c.id = f.clientes_id
+WHERE f.fecha_factura BETWEEN '2023-01-01 10:17:29' AND '2023-12-30 11:30:52' */
+
+
+        $facturasInformeGeneral = DB::select(
+            'SELECT f.id AS id_factura,  f.fecha_factura, c.nombre_cliente, f.num_prendas, f.descripcion_factura,
+            f.fec_entrega, f.precio_factura, f.abono_factura, es.estado, d_e.fecha AS fecha_estados
+            FROM facturas as f 
+            INNER JOIN detalles_estados as d_e
+            ON f.id = d_e.facturas_id 
+            INNER JOIN estados AS es
+            ON es.id = d_e.estados_id
+            INNER JOIN clientes as c 
+            ON c.id = f.clientes_id
+            
+            WHERE fecha_factura BETWEEN ? AND ? ORDER BY id_factura',
+            [$fechaInicio, $fechaFin]
+        );
+
+
+
+
+        // Retornar la vista con las facturas
+        return view('informes.index', compact('facturasInformeGeneral'));
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +69,14 @@ class InformesController extends Controller
      */
     public function index()
     {
-        //
-        
-        return view('informes/index');
+
+        return view('informes.index');
     }
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -38,6 +97,7 @@ class InformesController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**

@@ -46,25 +46,25 @@
                                     <a class="btn btn-primary" href="{{ url('/empleados/' . $empleado->id . '/edit') }}">
                                         Editar
                                     </a>
-<!-- 
+                                    <!--
 
-<p>||</p>
+    <p>||</p>
 
-<form action="{{ url('/empleados/' . $empleado->id) }}" method="post"
-                                        class="formularioEliminar">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
+    <form action="{{ url('/empleados/' . $empleado->id) }}" method="post"
+                                            class="formularioEliminar">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
 
-                                        <input class="btn btn-danger" type="submit" value="Borrar">
+                                            <input class="btn btn-danger" type="submit" value="Borrar">
 
 
-                                    </form>
--->
- 
+                                        </form>
+    -->
 
-                                  
 
-                                    
+
+
+
 
 
 
@@ -102,14 +102,12 @@
     </script>
     <script>
         @if (session('eliminar') == 'ok')
-        
+
             Swal.fire(
-            'Borrado!',
-            'El Empleado fue borrado :( ',
-            'success'
+                'Borrado!',
+                'El Empleado fue borrado :( ',
+                'success'
             )
-        
-        
         @endif
 
 
@@ -150,13 +148,12 @@
 
     <script>
         @if (session('empleado_ok') == 'ok')
-        
+
             Swal.fire(
-            'Empleado Creado Con Exito!!!',
-            'Continuar',
-            'success'
+                'Empleado Creado Con Exito!!!',
+                'Continuar',
+                'success'
             )
-        
         @endif
     </script>
 @stop

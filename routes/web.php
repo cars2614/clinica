@@ -10,16 +10,22 @@ use App\Http\Controllers\InformesController;
 use App\Http\Controllers\PrestamosController;
 //use App\Models\DetallesEstado;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+/* 
+El ->name('welcome') Se utiliza para colocarle un nombre fijo a la rura.... asi cambie de nombre la ruta 
+siempre se la podemos llamar como la renombremos.
+*/
+Route::view('/', 'welcome')->name('welcome');
+
 
 Auth::routes();
 
+
+/* 
+->middleware('auth') SE UTILIZA PARA DENEGAR EL ACCESO SI NO ESTA LOGEADO
+*/
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
-
-
-/* ->middleware('auth') SE UTILIZA PARA DENEGAR EL ACCESO SI NO ESTA LOGEADO*/
 
 
 /* ruta de clientes */
@@ -42,4 +48,13 @@ route::resource('cuadernoPago', CuadernoPagoController::class)->middleware('auth
 route::resource('detallesEstados', DetallesEstadoController::class)->middleware('auth');
 
 /* rutas informes */
-route::resource('informes', InformesController::class)->middleware('auth');
+route::resource('informes', InformesController::class)->middleware('auth'); 
+route::post('/informes/consultaGeneral', [InformesController::class, 'consultaGeneral' ])->name('informes.consultaGeneral')->middleware('auth');
+
+
+/* route::get('/informes', 'InformesController@index')->name('informes.index')->middleware('auth');
+route::post('/informes', 'InformesController@informeGeneral')->name('informes.informeGeneral')->middleware('auth'); */
+
+/* route::get('/informes', InformesController::class)->middleware('auth');
+route::post('/informes', InformesController::class)->middleware('auth');
+ */

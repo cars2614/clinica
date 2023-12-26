@@ -224,7 +224,7 @@ return [
         ['header' => 'CLIENTES'],
         [
             'text' => 'Cliente',
-            'url'  => '/clientes',
+            'url'  => '/clientes', 
             'icon' => 'fas fa-fw fa-user-plus',
         ],
 
