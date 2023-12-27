@@ -52,9 +52,5 @@ route::resource('informes', InformesController::class)->middleware('auth');
 route::post('/informes/consultaGeneral', [InformesController::class, 'consultaGeneral' ])->name('informes.consultaGeneral')->middleware('auth');
 
 
-/* route::get('/informes', 'InformesController@index')->name('informes.index')->middleware('auth');
-route::post('/informes', 'InformesController@informeGeneral')->name('informes.informeGeneral')->middleware('auth'); */
+route::post('/informes/clientes', [InformesController::class, 'consultaClientes'])->name('informes.clientes')->middleware('auth');
 
-/* route::get('/informes', InformesController::class)->middleware('auth');
-route::post('/informes', InformesController::class)->middleware('auth');
- */

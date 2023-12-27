@@ -25,18 +25,8 @@ class InformesController extends Controller
         $fechaInicio = $consultaG->fechaInicio = $request->fechaInicio;
         $fechaFin = $consultaG->fechaFin = $request->fechaFin;
 
-        /* dd($fechaInicio, $fechaFin);  Compruebo que las variables lleguen*/
-
-
-        /*  SELECT * FROM facturas as f 
-INNER JOIN detalles_estados as d_e
-ON f.id = d_e.facturas_id 
-INNER JOIN estados AS es
-ON es.id = d_e.estados_id
-INNER JOIN clientes as c 
-ON c.id = f.clientes_id
-WHERE f.fecha_factura BETWEEN '2023-01-01 10:17:29' AND '2023-12-30 11:30:52' */
-
+        // dd($fechaInicio, $fechaFin);  /*Compruebo que las variables lleguen*/
+      
 
         $facturasInformeGeneral = DB::select(
             'SELECT f.id AS id_factura,  f.fecha_factura, c.nombre_cliente, f.num_prendas, f.descripcion_factura,
@@ -49,7 +39,8 @@ WHERE f.fecha_factura BETWEEN '2023-01-01 10:17:29' AND '2023-12-30 11:30:52' */
             INNER JOIN clientes as c 
             ON c.id = f.clientes_id
             
-            WHERE fecha_factura BETWEEN ? AND ? ORDER BY id_factura',
+            WHERE DATE(fecha_factura)>= ? AND DATE(fecha_factura)<= ?
+            ORDER BY  id_factura DESC',
             [$fechaInicio, $fechaFin]
         );
 
@@ -60,6 +51,13 @@ WHERE f.fecha_factura BETWEEN '2023-01-01 10:17:29' AND '2023-12-30 11:30:52' */
         return view('informes.index', compact('facturasInformeGeneral'));
     }
 
+
+    public function consultaClientes()
+    {
+
+
+        return view('informes.clientes');
+    }
 
 
     /**
