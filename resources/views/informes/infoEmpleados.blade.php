@@ -1,27 +1,27 @@
 @extends('adminlte::page')
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 
 @stop
 
-@section('title', 'Informes Generales')
-
+@section('title', 'infoEmpleados')
 
 
 
 @section('content')
 
+
     <div id="container">
         <div id="row">
 
 
-            <form action=" {{ route('informes.consultaGeneral') }}" method="post">
+            <form action=" {{ route('informes.consultaEmpleados')  }}" method="post">
                 @csrf
                 <div>
-                    <h2>Consulta de Paquetes Por Fechas</h2>
+                    <h2>Consulta de Empleados Por Fechas</h2>
                 </div>
                 <br>
 
@@ -40,12 +40,40 @@
                             value="{{ $fechaFin ?? '' }}" required>
 
                     </div>
-                    <div class="mb-12 col-4">
+
+                    <div class="mb-3 col-4">
+                        <label for="" class="form-label">Telefono Empleado:</label>
+
+                        <select name="empleados_id" id="empleados_id" class="form-control form-control-lg">
+                            <option value="">Seleccione Empleado</option>
+
+                            @if (isset($consulaEmpleados))
+
+                                @foreach ($consulaEmpleados as $empleado)
+                                    <option value= "{{ $empleado->emp_id }}"> {{ $empleado->emp_telefono_empleado }}
+                                        {{ $empleado->emp_nombre_empleado }}
+                                    </option>
+                                @endforeach
+
+                        </select>
+                        @error('clientes_id')
+                            <br>
+                            <small class="alert-danger"> *{{ $message }}</small>
+                            <br>
+                        @enderror
+
+                        @endif
+
+                    </div>
+
+                    <div class="mb-3 col-12">
                         <br>
 
                         <input type="submit" class="form-control form-control-lg btn btn-primary" value="Consultar">
 
                     </div>
+
+
 
 
                 </div>
@@ -63,7 +91,7 @@
 
 
 
-                    <table id="infoGeneral" class="table table-striped">
+                    <table id="infoClientes" class="table table-striped">
                         <thead class="thead-striped">
                             <tr>
                                 <th>#</th>
@@ -80,10 +108,10 @@
                         </thead>
 
                         <!-- Mostrar resultados de la consulta -->
-                        @if (isset($facturasInformeGeneral))
+                        @if (isset($empleadosInformeGeneral))
 
                             <tbody>
-                                @foreach ($facturasInformeGeneral as $factura)
+                                @foreach ($empleadosInformeGeneral as $factura)
                                     <tr>
                                         <td>{{ $factura->id_factura }}</td>
                                         <td>{{ $factura->fecha_factura }}</td>
@@ -131,17 +159,13 @@
 
 
 
-
-
-
-
 @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
-        $('#infoGeneral').DataTable();
+        $('#infoClientes').DataTable();
     </script>
 
     <script>

@@ -48,9 +48,13 @@ route::resource('cuadernoPago', CuadernoPagoController::class)->middleware('auth
 route::resource('detallesEstados', DetallesEstadoController::class)->middleware('auth');
 
 /* rutas informes */
-route::resource('informes', InformesController::class)->middleware('auth'); 
+route::get('/informes/infoClientes',    [InformesController::class, 'infoClientes'])->name('informes.infoClientes')->middleware('auth');
+route::post('/informes/infoClientes',    [InformesController::class, 'consultaClientes'])->name('informes.consultaClientes')->middleware('auth');
+
+/* informes empleados */
+route::get('/informes/infoEmpleados',    [InformesController::class, 'infoEmpleados'])->name('informes.infoEmpleados')->middleware('auth');
+route::post('/informes/infoEmpleados',    [InformesController::class, 'consultaEmpleados'])->name('informes.consultaEmpleados')->middleware('auth');
+
+
 route::post('/informes/consultaGeneral', [InformesController::class, 'consultaGeneral' ])->name('informes.consultaGeneral')->middleware('auth');
-
-
-route::post('/informes/clientes', [InformesController::class, 'consultaClientes'])->name('informes.clientes')->middleware('auth');
-
+route::resource('informes', InformesController::class)->middleware('auth'); 

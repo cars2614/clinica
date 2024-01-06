@@ -276,12 +276,12 @@ return [
                 [
                     'text' => 'Informe Cliente',
                     'icon' => 'fas fa-fw fa-user-check',
-                    'url' => '/informes/clientes'
+                    'url' => '/informes/infoClientes'
                 ],
                 [
                     'text' => 'Informe Empleado',
                     'icon' => 'fas fa-fw fa-hard-hat',
-                    'url' => '/informes/empleados'
+                    'url' => '/informes/infoEmpleados'
                 ]
             ]
          ],
