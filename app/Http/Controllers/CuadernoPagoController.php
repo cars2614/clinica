@@ -110,7 +110,7 @@ class CuadernoPagoController extends Controller
         $datosCuadernoPago = request()->except('_token');
         
         CuadernoPago::insert($datosCuadernoPago);
-        return redirect('/cuadernoPago/create');
+        return redirect('/cuadernoPago/create')->with('cuaderno_pago_ok', 'ok');
 
         
     }

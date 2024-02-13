@@ -3,21 +3,23 @@
 namespace Database\Seeders;
 
 use App\Models\Estado;
+use App\Models\Empleado;
+use App\Models\Clientes;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // \App\Models\User::factory(10)->create();
+  /**
+   * Seed the application's database.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    // \App\Models\User::factory(10)->create();
 
-        /*
+    /*
         Se insertan los siguientes datos de manera automatica con 
         el comando php artisan db:seed
 
@@ -27,8 +29,8 @@ class DatabaseSeeder extends Seeder
         php artisan migrate:refresh --seed        
         */
 
-        //************************************* */
-      /*
+    //************************************* */
+    /*
         $super = new User();
 
         $super->id = 1;
@@ -40,46 +42,75 @@ class DatabaseSeeder extends Seeder
 
         $super->save();
         */
-        
+
+    $super = new User();
+
+    $super->id = 1;
+    $super->name = "Dayana Sabogal";
+    $super->email = "sabogalgomez17@gmail.com";
+    $super->password = '$2y$10$jBnqXIk3VZAC/NXGmYp9D./qJwh.ZkrmXPwIOn/uSTmT9Y0zjiO9.';
+   
+
+    $super->save();
 
 
-        //************************************* */
-        $estado = new Estado();
 
-        $estado->estado = "Recibido";
-        $estado->save();
+    //************************************* */
+    $estado = new Estado();
 
-        //************************************* */
-        $estado2 = new Estado();
+    $estado->estado = "Recibido";
+    $estado->save();
 
-        $estado2->estado = "Realizado";
-        $estado2->save();
-                        
+    //************************************* */
+    $estado2 = new Estado();
 
-        //************************************* */
-        $estado3 = new Estado();
-
-        $estado3->estado = "Entregado";
-        $estado3->save();
-                        
-
-        //************************************* */
-        $estado4 = new Estado();
-
-        $estado4->estado = "Devuelto";
-        $estado4->save();
-                        
-
-        //************************************* */
-        $estado5 = new Estado();
-
-        $estado5->estado = "Garantia";
-        $estado5->save();
-                        
-
-        
-                        
+    $estado2->estado = "Realizado";
+    $estado2->save();
 
 
-    }
+    //************************************* */
+    $estado3 = new Estado();
+
+    $estado3->estado = "Entregado";
+    $estado3->save();
+
+
+  
+
+    //************************************* */
+    $estado4 = new Estado();
+
+    $estado4->estado = "Garantia";
+    $estado4->save();
+
+
+    //************************************* */
+
+    $empleado = new Empleado();
+
+   
+    $empleado->telefono_empleado = "3186654840";
+    $empleado->nombre_empleado = "Dayana Sabogal";
+    $empleado->direccion_empleado = "Arkacentro";
+
+    $empleado->save();
+
+    //************************************* */
+
+    $cliente = new Clientes();
+
+   
+    $cliente->telefono_cliente = "3186654840";
+    $cliente->nombre_cliente = "Carlos Ramirez";
+    $cliente->direccion_cliente = "Milenium 1 ";
+
+    $cliente->save();
+
+
+    //************************************* */
+
+
+
+    //************************************* */
+  }
 }

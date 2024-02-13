@@ -137,10 +137,10 @@
 
 
     <script>
-        @if (session('_ok') == 'ok')
+        @if (session('cuaderno_pago_ok') == 'ok')
 
             Swal.fire(
-                'Agregado Con Exito!!!',
+                'Agregado Al Cuaderno De Pago con Exito!!!',
                 'Continuar',
                 'success'
             )

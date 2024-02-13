@@ -134,9 +134,9 @@
 
 
     <script>
-        @if (session('_ok') == 'ok')
+        @if (session('entregado_ok') == 'ok')
             Swal.fire(
-                'Agregado Con Exito!!!',
+                'Entregado Con Exito!!!',
                 'Continuar',
                 'success'
             )

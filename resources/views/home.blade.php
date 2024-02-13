@@ -11,7 +11,30 @@
 @stop
 
 @section('content')
-    <p>Pagina Inicial</p>
+
+
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="fas fa-user fa-2x"></i>
+                    </div>
+                    <a href="#" class="card-category text-warning font-weight-bold">
+                        Usuarios
+                    </a>
+                    <h3 class="card-title">okokokok</h3>
+                </div>
+
+                <div 
+                class="card-footer bg-warning text-white">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
 @stop
 
 @section('css')
@@ -20,16 +43,14 @@
 
 @section('js')
     <script>
-
-      /* 
-      se comenta para que no salga la alerta al inicio
-      solo es una prueba de que funciona bien       
-        Swal.fire(
-            'Bienvenid@!',
-            'Ejemplo alert2!',
-            'success'
-        ) */
-
+        /* 
+          se comenta para que no salga la alerta al inicio
+          solo es una prueba de que funciona bien       
+            Swal.fire(
+                'Bienvenid@!',
+                'Ejemplo alert2!',
+                'success'
+            ) */
     </script>
 @stop
 

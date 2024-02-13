@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateFacturasTable extends Migration
 {
@@ -24,23 +25,18 @@ class CreateFacturasTable extends Migration
             $table->id();
             $table->timestamp('fecha_factura')->default(DB::raw('CURRENT_TIMESTAMP'));
 
-            //nueva forma de relacionar 
-            $table->foreignId('clientes_id')->constrained('clientes'); 
+            $table->foreignId('clientes_id')->constrained('clientes');            
 
             $table->integer('num_prendas');            
             $table->text('descripcion_factura')->nullable();
             $table->datetime('fec_entrega');
             $table->integer('precio_factura');
-            $table->integer('abono_factura');  
-                
-           
-            /* $table-> */
-            $table->timestamps();
-           
-            /* manera antigua de relacionar tablas
-            $table->unsignedBigInteger('clientes_id');            
-            $table->foreign('clientes_id')->references('id')->on('clientes'); */
-  
+            $table->integer('abono_factura');
+
+            $table->foreignId('empleados_id')->constrained('empleados');
+            
+            $table->timestamps();          
+            
        
         });
             /*

@@ -83,43 +83,8 @@ class DetallesEstadoController extends Controller
 
         DetallesEstado::insert($detallesEstado);
 
-        //return view('detallesEstados.index');
-        
-        $factura = DB::select('SELECT f.id, c.nombre_cliente        
-        FROM facturas f         
-        INNER JOIN clientes c 
-        on f.clientes_id=c.id
-        INNER JOIN detalles_estados d_e
-        ON f.id = d_e.facturas_id
-        WHERE d_e.estados_id >= 2
-        GROUP BY f.id, c.nombre_cliente');
 
-        $estado = DB::select(
-                'SELECT estados.id, estados.estado 
-        FROM estados
-        INNER JOIN detalles_estados
-        ON detalles_estados.id = estados.id
-        WHERE estados.id >= 3 '
-            );
-
-
-        $todasLasacturas = DB::select('SELECT d_e.fecha, f.id, c.nombre_cliente, f.precio_factura, f.abono_factura, 	           e.estado    
-        FROM facturas f         
-        INNER JOIN clientes c 
-        on f.clientes_id=c.id
-        INNER JOIN detalles_estados d_e
-        ON f.id = d_e.facturas_id
-        INNER JOIN estados e
-        ON d_e.estados_id = e.id
-        WHERE d_e.estados_id  >= 3 
-        
-        ');
-
-
-        return response()->view(
-            'detallesEstados.index',
-            ['facturas' => $factura, 'estados' => $estado, 'todasLasacturas' => $todasLasacturas]
-        );
+        return redirect('/detallesEstados')->with('entregado_ok', 'ok'); 
         
     }
 

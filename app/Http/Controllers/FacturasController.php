@@ -6,6 +6,7 @@ use App\Models\DetallesEstado;
 
 use App\Models\Facturas;
 use App\Models\Clientes;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,15 +46,23 @@ class FacturasController extends Controller
     public function create()
     {
         //
-        $cliente = Clientes::all();
-        $datos = array("lista_clientes" => $cliente);
+        $lista_clientes = DB::select('SELECT * FROM clientes');
 
-        return response()->view("facturas/create", $datos, 200);
+        $lista_empleados = DB::select('SELECT * FROM empleados');
+
+        $numeroFactura = DB::select('SELECT COUNT(*)AS cantidad FROM facturas');
+
+       /*  dd($lista_empleados , $lista_clientes); */
+        
+
+        return view('facturas/create', compact('lista_clientes', 'numeroFactura', 'lista_empleados') );
         
 
         /* return view('facturas.create'); */
         
     }
+
+   
 
     /**
      * Store a newly created resource in storage.
@@ -75,12 +84,16 @@ class FacturasController extends Controller
             'descripcion_factura' => 'required',
             'fec_entrega'         => 'required',
             'precio_factura'      => 'required|min:1',
-            'abono_factura'       => 'required'
+            'abono_factura'       => 'required',
+            'empleados_id'       => 'required',
             
         ]);    
-       
+        
 
         $datosFacturas = request()->except('_token');
+
+        // Imprimir datos para depuración
+    /*    dd($datosFacturas);   */
 
        Facturas::insert($datosFacturas);
 

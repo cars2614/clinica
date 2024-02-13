@@ -2,18 +2,62 @@
 
 @section('title', 'Facturas')
 
+
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+
+    <link rel="stylesheet" href="{{ asset('/vendor/jquery-ui/jquery-ui.min.css') }}">
+@stop
+
+
 @section('content_header')
 
     <div class="card">
         <div class="card-body">
 
+            <a href="{{ url('/facturas') }}" class="btn btn-info m-2">Total Facturas Del Dia</a>
+            <a href="{{ url('/clientes/create') }}" class="btn btn-info m-2">Agregar Cliente Nuevo</a>
+            <div class="card-body">
 
-            <div class="container-header">
+                @foreach ($numeroFactura as $num)
+                    <h3>Proximo Codigo
+                        <b>
+                            {{ $num->cantidad + 1 }}
+                        </b>
+                    </h3>
+                @endforeach
 
-                <h2>Facturar</h2> <br>
-                <a href="{{ url('/facturas') }}" class="btn btn-info m-2">Total Facturas Del Dia</a>
-                <a href="{{ url('/clientes/create') }}" class="btn btn-info m-2">Agregar Cliente Nuevo</a>
+
             </div>
+
+
+            {{-- {{ dd($lista_clientes); }} --}}
+
+            {{-- {{ dd($lista_empleados); }}  --}}
+
+            {{--  {{ dd($numeroFactura); }}   --}}
+
+            {{-- inicio Prueba --}}
+            <div class="mb-3 col-9">
+
+
+                <label for="" class="form-label">PRUEBA:</label>
+                {{--  <input type="hidden" id="clientes_id" value="1" name="idcliente" required> --}}
+                <label>Nombre</label>
+                <input type="text" name="prueba" id="prueba" class="form-control"
+                    placeholder="Ingrese nombre del cliente" required>
+
+
+
+
+            </div>
+
+            {{-- fin de la prueba  --}}
+
+
+
+
         </div>
     </div>
 
@@ -40,10 +84,11 @@
 
 
 
+
                     <div class="mb-3 col-9">
                         <label for="" class="form-label">Codigo Cliente:</label>
 
-                        <select name="clientes_id" id="clientes_id" class="form-control form-control-lg">
+                        <select name="clientes_id" id="clientes_id" class="form-control form-control-lg" required>
                             <option value="">Seleccione Cliente</option>
                             @foreach ($lista_clientes as $cliente)
                                 <option value= "{{ $cliente->id }}"> {{ $cliente->telefono_cliente }}
@@ -87,7 +132,7 @@
 
                 <div class="form-group row mb-0">
 
-                    <div class="mb-3 col-4">
+                    <div class="mb-3 col-3">
                         <label for="" class="form-label">Fecha Entrega: </label>
                         <input type="datetime-local" class="form-control form-control-lg" name="fec_entrega"
                             id="fec_entrega" value="" required>
@@ -98,7 +143,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3 col-4">
+                    <div class="mb-3 col-3">
                         <label for="" class="form-label">Precio: </label>
                         <input type="number" class="form-control form-control-lg" name="precio_factura" id="precio_factura"
                             placeholder="Ingrese el precio total" value="" required>
@@ -109,7 +154,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3 col-4">
+                    <div class="mb-3 col-3">
                         <label for="" class="form-label">Abono: </label>
                         <input type="number" class="form-control form-control-lg" name="abono_factura" id="abono_factura"
                             placeholder="Ingrese el abono" value="" required>
@@ -118,6 +163,28 @@
                             <small class="alert-danger"> *{{ $message }}</small>
                             <br>
                         @enderror
+                    </div>
+
+
+                    {{-- EMPLEADO --}}
+
+                    <div class="mb-3 col-3">
+                        <label for="" class="form-label">Empleado que recibe:</label>
+
+                        <select name="empleados_id" id="empleados_id" class="form-control form-control-lg" required>
+                            <option value="">Seleccione Empleado</option>
+                            @foreach ($lista_empleados as $empleado)
+                                <option value= "{{ $empleado->id }}">
+                                    {{ $empleado->telefono_empleado }} {{ $empleado->nombre_empleado }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('empleados_id')
+                            <br>
+                            <small class="alert-danger"> *{{ $message }}</small>
+                            <br>
+                        @enderror
+
                     </div>
 
 
@@ -148,56 +215,15 @@
 
 
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+
 
 @section('js')
-    <script>
-        @if (session('eliminar') == 'ok')
 
-            Swal.fire(
-                'Borrado!',
-                'El cliente fue borrado :( ',
-                'success'
-            )
-        @endif
-
-
-        $('.formularioEliminar').submit(function(e) {
-
-                e.preventDefault();
-
-                Swal.fire({
-                    title: 'Quieres BORRAR este ?',
-                    text: "No lo podras recuperar!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, quiero Borrarlo!',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.value) {
-
-                        /*  Swal.fire(
-                             'Borrado!',
-                             'El cliente fue borrado.',
-                             'success'
-                         ) */
-
-                        this.submit();
-                    }
-                })
-
-            }
+    <script src="{{ asset('/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
 
 
 
-        );
 
-        /*     */
-    </script>
 
     <script>
         @if (session('factura_ok') == 'ok')
@@ -209,4 +235,25 @@
             )
         @endif
     </script>
+
+
+
+
+
+    <script>
+        // var curso = ['css', 'html', 'javascript', 'php'];
+
+        $('#prueba').autocomplete({
+            source: function(request, response) {
+
+                $.ajax({
+
+                    url: '',
+
+                });
+
+            }
+        });
+    </script>
+
 @stop

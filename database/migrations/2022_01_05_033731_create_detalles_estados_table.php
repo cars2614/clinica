@@ -23,6 +23,12 @@ class CreateDetallesEstadosTable extends Migration
             $table->foreignId('facturas_id')->constrained('facturas');
             $table->foreignId('estados_id')->constrained('estados');
             
+            //nueva forma de relacionar 
+           /*  
+           se bloquea por que presenta inconvenientes con la factura
+           $table->foreignId('empleados_id')->constrained('empleados'); */
+            
+            
             //$table->string('detalle')->nullable();            
 
             $table->timestamps();

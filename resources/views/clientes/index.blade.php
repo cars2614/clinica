@@ -21,7 +21,7 @@
 
                 <thead class="thead-striped ">
                     <tr>
-                        <th>Id</th>
+                       
                         <th>Telefono</th>
                         <th>Nombre</th>
                         <th>Direccion</th>
@@ -33,7 +33,7 @@
                 <tbody>
                     @foreach ($clientes as $cliente)
                         <tr>
-                            <td>{{ $cliente->id }}</td>
+                            
                             <td>{{ $cliente->telefono_cliente }}</td>
                             <td>{{ $cliente->nombre_cliente }}</td>
                             <td>{{ $cliente->direccion_cliente }}</td>
