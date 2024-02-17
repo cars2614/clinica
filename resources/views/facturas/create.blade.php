@@ -20,6 +20,8 @@
             <a href="{{ url('/clientes/create') }}" class="btn btn-info m-2">Agregar Cliente Nuevo</a>
             <div class="card-body">
 
+
+
                 @foreach ($numeroFactura as $num)
                     <h3>Proximo Codigo
                         <b>
@@ -29,31 +31,27 @@
                 @endforeach
 
 
-            </div>
+                <form action="" method="POST">
 
 
-            {{-- {{ dd($lista_clientes); }} --}}
+                    {{-- inicio Prueba --}}
 
-            {{-- {{ dd($lista_empleados); }}  --}}
-
-            {{--  {{ dd($numeroFactura); }}   --}}
-
-            {{-- inicio Prueba --}}
-            <div class="mb-3 col-9">
+                    <div class="mb-3 col-9">
 
 
-                <label for="" class="form-label">PRUEBA:</label>
-                {{--  <input type="hidden" id="clientes_id" value="1" name="idcliente" required> --}}
-                <label>Nombre</label>
-                <input type="text" name="prueba" id="prueba" class="form-control"
-                    placeholder="Ingrese nombre del cliente" required>
+                        {{-- <label for="" class="form-label">PRUEBA:</label> --}}
+                        {{--  <input type="hidden" id="clientes_id" value="1" name="idcliente" required> --}}
+                        {{-- <label>Nombre</label>
+                        <input type="text" id="buscar" class="form-control" placeholder="Ingrese nombre del cliente"
+                            required> --}}
 
+                    </div>
 
+                    {{-- fin de la prueba  --}}
+                </form>
 
 
             </div>
-
-            {{-- fin de la prueba  --}}
 
 
 
@@ -81,6 +79,7 @@
 
 
                 <div class="form-group row mb-0">
+
 
 
 
@@ -243,17 +242,80 @@
     <script>
         // var curso = ['css', 'html', 'javascript', 'php'];
 
-        $('#prueba').autocomplete({
+        // var nombre = ['css', 'html', 'javascript', 'php'];
+
+
+        $("#buscar").autocomplete({
+            minLength: 2,
+            source: function(request, response) {
+                $.ajax({
+
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            select: function(event, ui) {
+                $("#idcliente").val(ui.item.id);
+                $("#buscar").val(ui.item.label);
+                $("#tel_cliente").val(ui.item.telefono);
+                $("#dir_cliente").val(ui.item.direccion);
+            }
+        })
+
+
+        $('#buscar').autocomplete({
             source: function(request, response) {
 
                 $.ajax({
 
-                    url: '',
+                    url: "{{ route('facturas.create') }}",
+                    dataType: 'json',
+                    clientes: {
+
+                        term: request.term
+
+                    },
+
+                    success: function(clientes) {
+
+                        response(clientes)
+
+                    }
+
 
                 });
 
             }
+
+
         });
+
+        /* 
+                $('#prueba').autocomplete({
+                    source: function(request, response) {
+
+                        $.ajax({
+
+                            url: "{{ route('facturas.create') }}",
+                            dataType: 'json',
+                            data: {
+                                temporal: request.term
+                            },
+
+                            success: function(data){
+                                response(data)
+                            }
+
+                        });
+
+                    }
+                }); 
+         */
     </script>
 
 @stop

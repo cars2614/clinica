@@ -8,6 +8,8 @@ use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\InformesController;
 use App\Http\Controllers\PrestamosController;
+use App\Http\Controllers\ConsultaCliente;
+
 //use App\Models\DetallesEstado;
 
 
@@ -15,6 +17,7 @@ use App\Http\Controllers\PrestamosController;
 El ->name('welcome') Se utiliza para colocarle un nombre fijo a la rura.... asi cambie de nombre la ruta 
 siempre se la podemos llamar como la renombremos.
 */
+
 Route::view('/', 'welcome')->name('welcome');
 
 
@@ -33,7 +36,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('clientes', ClientesController::class)->middleware('auth');
 
 /* rutas de facturas */
+
 Route::resource('facturas',  FacturasController::class)->middleware('auth');
+//Route::get('/facturas/xxx', [FacturasController::class, 'consultaClientes'])->name('facturas.consultaClientes')->middleware('auth');
+
 
 /* rutas Emplado */
 route::resource('empleados', EmpleadoController::class)->middleware('auth');
@@ -56,5 +62,5 @@ route::get('/informes/infoEmpleados',    [InformesController::class, 'infoEmplea
 route::post('/informes/infoEmpleados',    [InformesController::class, 'consultaEmpleados'])->name('informes.consultaEmpleados')->middleware('auth');
 
 
-route::post('/informes/consultaGeneral', [InformesController::class, 'consultaGeneral' ])->name('informes.consultaGeneral')->middleware('auth');
-route::resource('informes', InformesController::class)->middleware('auth'); 
+route::post('/informes/consultaGeneral', [InformesController::class, 'consultaGeneral'])->name('informes.consultaGeneral')->middleware('auth');
+route::resource('informes', InformesController::class)->middleware('auth');
