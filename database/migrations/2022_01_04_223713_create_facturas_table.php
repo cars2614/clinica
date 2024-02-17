@@ -33,7 +33,7 @@ class CreateFacturasTable extends Migration
             $table->integer('precio_factura');
             $table->integer('abono_factura');
 
-            $table->foreignId('empleados_id')->constrained('empleados');
+            $table->foreignId('empleados_id')->constrained('empleados')->default(3);
             
             $table->timestamps();          
             
