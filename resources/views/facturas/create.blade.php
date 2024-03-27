@@ -56,7 +56,7 @@
 
                 <div class="form-group row mb-0">
 
-                    <div class="mb-3 col-9">
+                    <div class="mb-3 col-6">
                         <label for="clientes_id" class="form-label">Nombre del Cliente</label>
 
                         <input type="hidden" id="clientes_id" name="clientes_id"class="form-control form-control-lg"
@@ -64,11 +64,19 @@
                         <input type="text" id="nombre_cliente" class="form-control form-control-lg"
                             placeholder="Ingrese nombre del cliente">
 
+
+
                         @error('clientes_id')
                             <br>
                             <small class="alert-danger"> *{{ $message }}</small>
                             <br>
                         @enderror
+
+                    </div>
+
+                    <div class="mb-3 col-3">
+                        <label for="telefono_cliente" class="form-label">Telefono del Cliente</label>
+                        <input type="text" id="telefono_cliente" class="form-control form-control-lg" readonly>
 
                     </div>
 
@@ -228,6 +236,7 @@
                 // Asignar el ID del cliente al campo oculto
                 $('#clientes_id').val(ui.item.id);
                 // Agrega más campos según sea necesario
+                $('#telefono_cliente').val(ui.item.telefono_cliente);
             }
         });
 

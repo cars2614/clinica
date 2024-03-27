@@ -84,7 +84,7 @@ class FacturasController extends Controller
 
 
         return response()->json($data);
-        //return $data;
+        // return $data;
     }
 
 
@@ -100,7 +100,7 @@ class FacturasController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->all());
+        // dd($request->all());
         $request->validate([
 
             //'fecha_factura'     => 'required',
