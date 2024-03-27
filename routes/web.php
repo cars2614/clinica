@@ -36,9 +36,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('clientes', ClientesController::class)->middleware('auth');
 
 /* rutas de facturas */
-
-Route::resource('facturas',  FacturasController::class)->middleware('auth');
-//Route::get('/facturas/xxx', [FacturasController::class, 'consultaClientes'])->name('facturas.consultaClientes')->middleware('auth');
+route::get('/facturas/consultaClientes', [FacturasController::class, 'consultaClientes'])->name('consultaClientes')->middleware('auth');
+route::post('/facturas/consultaClientes', [FacturasController::class, 'consultaClientes'])->name('consultaClientes')->middleware('auth');
+route::resource('facturas',  FacturasController::class)->middleware('auth');
 
 
 /* rutas Emplado */

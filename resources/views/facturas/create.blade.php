@@ -31,29 +31,7 @@
                 @endforeach
 
 
-                <form action="" method="POST">
-
-
-                    {{-- inicio Prueba --}}
-
-                    <div class="mb-3 col-9">
-
-
-                        {{-- <label for="" class="form-label">PRUEBA:</label> --}}
-                        {{--  <input type="hidden" id="clientes_id" value="1" name="idcliente" required> --}}
-                        {{-- <label>Nombre</label>
-                        <input type="text" id="buscar" class="form-control" placeholder="Ingrese nombre del cliente"
-                            required> --}}
-
-                    </div>
-
-                    {{-- fin de la prueba  --}}
-                </form>
-
-
             </div>
-
-
 
 
         </div>
@@ -70,8 +48,6 @@
 
             {{-- FORMULARIO DE INGRESO DE PRENDAS --}}
 
-
-
             <form action=" {{ url('/facturas') }}" method="post">
 
                 <!--llave de seguridad... sin esta el fomulario no se envia-->
@@ -80,21 +56,14 @@
 
                 <div class="form-group row mb-0">
 
-
-
-
-
                     <div class="mb-3 col-9">
-                        <label for="" class="form-label">Codigo Cliente:</label>
+                        <label for="clientes_id" class="form-label">Nombre del Cliente</label>
 
-                        <select name="clientes_id" id="clientes_id" class="form-control form-control-lg" required>
-                            <option value="">Seleccione Cliente</option>
-                            @foreach ($lista_clientes as $cliente)
-                                <option value= "{{ $cliente->id }}"> {{ $cliente->telefono_cliente }}
-                                    {{ $cliente->nombre_cliente }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <input type="hidden" id="clientes_id" name="clientes_id"class="form-control form-control-lg"
+                            required>
+                        <input type="text" id="nombre_cliente" class="form-control form-control-lg"
+                            placeholder="Ingrese nombre del cliente">
+
                         @error('clientes_id')
                             <br>
                             <small class="alert-danger"> *{{ $message }}</small>
@@ -218,10 +187,8 @@
 
 @section('js')
 
+    <script src="{{ asset('/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-
-
-
 
 
     <script>
@@ -236,86 +203,46 @@
     </script>
 
 
-
-
-
     <script>
-        // var curso = ['css', 'html', 'javascript', 'php'];
-
-        // var nombre = ['css', 'html', 'javascript', 'php'];
-
-
-        $("#buscar").autocomplete({
-            minLength: 2,
+        $('#nombre_cliente').autocomplete({
             source: function(request, response) {
                 $.ajax({
-
-                    dataType: "json",
+                    url: "{{ route('consultaClientes') }}",
+                    dataType: 'json',
                     data: {
-                        q: request.term
+                        term: request.term
                     },
                     success: function(data) {
-                        response(data);
+
+
+                        response(data)
                     }
+
                 });
+
             },
             select: function(event, ui) {
-                $("#idcliente").val(ui.item.id);
-                $("#buscar").val(ui.item.label);
-                $("#tel_cliente").val(ui.item.telefono);
-                $("#dir_cliente").val(ui.item.direccion);
+
+                // Rellenar el campo visible con el nombre del cliente
+                $('#cliente_nombre').val(ui.item.nombre);
+                // Asignar el ID del cliente al campo oculto
+                $('#clientes_id').val(ui.item.id);
+                // Agrega más campos según sea necesario
             }
-        })
-
-
-        $('#buscar').autocomplete({
-            source: function(request, response) {
-
-                $.ajax({
-
-                    url: "{{ route('facturas.create') }}",
-                    dataType: 'json',
-                    clientes: {
-
-                        term: request.term
-
-                    },
-
-                    success: function(clientes) {
-
-                        response(clientes)
-
-                    }
-
-
-                });
-
-            }
-
-
         });
 
-        /* 
-                $('#prueba').autocomplete({
-                    source: function(request, response) {
 
-                        $.ajax({
 
-                            url: "{{ route('facturas.create') }}",
-                            dataType: 'json',
-                            data: {
-                                temporal: request.term
-                            },
 
-                            success: function(data){
-                                response(data)
-                            }
 
-                        });
 
-                    }
-                }); 
-         */
+        //Prueba 
+        /*  let nombre = ['css', 'html', 'javascript', 'php'];
+
+         $('#nombrejs').autocomplete({
+             source: nombre
+         }); */
+        //Fin de la prueba
     </script>
 
 @stop

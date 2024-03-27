@@ -44,87 +44,49 @@ class FacturasController extends Controller
     public function create(Request $request)
     {
 
-        if ($request->query('q')) {
-            $nombre = $request->query('q');
-            $clientes = Clientes::where('nombre_cliente', 'LIKE', '%' . $nombre . '%')->get();
-            return response()->json($clientes);
-        } 
-        else {
-            $clientes = [];
-            //return response()->json($clientes);
-            //return redirect('facturas/create');
-
-        }
-
-        //inicio de la prueba 
-
-        /*  $term = $request->get('term');
-
-
-
-        $clientes = Clientes::where('nombre_cliente',  'LIKE', '%$term%')->get(); */
-
-        // $clientes = DB::select("  SELECT * FROM clientes where nombre_cliente LIKE '%$term%'   ");
-
-
-        //$clientes = [];
-        /*   foreach ($clientes as $cliente) {
-
-
-            $clientes[] = [
-
-                'cliente' => $cliente->id,
-                'cliente' => $cliente->telefono_cliente,
-                'cliente' => $cliente->nombre_cliente
-
-
-            ];
-        } */
-
-        //final de la prueba
-
-        $lista_clientes = DB::select('SELECT * FROM clientes');
+        //$lista_clientes = DB::select('SELECT * FROM clientes');
 
         $lista_empleados = DB::select('SELECT * FROM empleados');
 
         $numeroFactura = DB::select('SELECT COUNT(*)AS cantidad FROM facturas');
 
+        //dd($numeroFactura,  $lista_empleados);
 
-        //dd($lista_empleados, $lista_clientes,  $clientes);
-
-
-
-        return view('facturas/create', compact('lista_clientes', 'numeroFactura', 'lista_empleados', 'clientes'));
+        return view('facturas/create', compact('numeroFactura', 'lista_empleados'));
     }
 
-    /* controlador de consulta de clientes */
 
-    /* 
+
+
+    /* controlador de consulta de clientes */
     public function consultaClientes(Request $request)
     {
 
-        $temporal = $request->get('temporal');
 
-        $clientes = Clientes::where('nombre_cliente',  'LIKE', '%' . $temporal . '%')->get();
+        $term = $request->get('term');
 
+
+        $clientes = Clientes::where('nombre_cliente', 'LIKE', '%' . $term . '%')->get();
 
         $data = [];
+
         foreach ($clientes as $cliente) {
 
 
             $data[] = [
 
-                'prueba' => $cliente->nombre_cliente
+                'label' => $cliente->nombre_cliente,
+                'telefono_cliente' => $cliente->telefono_cliente,
+                'id' => $cliente->id
 
             ];
         }
 
-         // dd($data); 
 
-        //return view('facturas/create', compact('data')); 
-        return view('facturas/create', ['data' => $data]);
-    } 
-  */
+        return response()->json($data);
+        //return $data;
+    }
+
 
 
     /**
@@ -138,6 +100,7 @@ class FacturasController extends Controller
     public function store(Request $request)
     {
 
+        //dd($request->all());
         $request->validate([
 
             //'fecha_factura'     => 'required',
@@ -153,10 +116,11 @@ class FacturasController extends Controller
         ]);
 
 
+
         $datosFacturas = request()->except('_token');
 
         // Imprimir datos para depuración
-        /*    dd($datosFacturas);   */
+        //dd($datosFacturas);
 
         Facturas::insert($datosFacturas);
 
