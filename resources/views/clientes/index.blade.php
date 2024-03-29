@@ -8,6 +8,11 @@
     <br>
 @stop
 
+@section('css')
+
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
+@stop
+
 @section('content')
 
     <div class="container col-md-12">
@@ -21,7 +26,7 @@
 
                 <thead class="thead-striped ">
                     <tr>
-                       
+
                         <th>Telefono</th>
                         <th>Nombre</th>
                         <th>Direccion</th>
@@ -33,7 +38,7 @@
                 <tbody>
                     @foreach ($clientes as $cliente)
                         <tr>
-                            
+
                             <td>{{ $cliente->telefono_cliente }}</td>
                             <td>{{ $cliente->nombre_cliente }}</td>
                             <td>{{ $cliente->direccion_cliente }}</td>
@@ -47,18 +52,18 @@
                                         Editar
                                     </a>
                                     <!--
-                                    <p>||</p>
+                                            <p>||</p>
 
-                                    <form action="{{ url('/clientes/' . $cliente->id) }}" method="post"
-                                        class="formularioEliminar">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
+                                            <form action="{{ url('/clientes/' . $cliente->id) }}" method="post"
+                                                class="formularioEliminar">
+                                                @csrf
+                                                {{ method_field('DELETE') }}
 
-                                        <input class="btn btn-danger" type="submit" value="Borrar">
+                                                <input class="btn btn-danger" type="submit" value="Borrar">
 
 
-                                    </form>
-                                    -->
+                                            </form>
+                                            -->
 
 
                                 </div>
@@ -78,8 +83,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 
 @stop
@@ -95,14 +99,12 @@
     </script>
     <script>
         @if (session('eliminar') == 'ok')
-        
+
             Swal.fire(
-            'Borrado!',
-            'El cliente fue borrado :( ',
-            'success'
+                'Borrado!',
+                'El cliente fue borrado :( ',
+                'success'
             )
-        
-        
         @endif
 
 
@@ -129,7 +131,7 @@
                          ) */
 
                         this.submit();
-                        
+
                     }
                 })
 
@@ -144,13 +146,12 @@
 
     <script>
         @if (session('cliente_ok') == 'ok')
-        
+
             Swal.fire(
-            'Cliente Creado Con Exito!!!',
-            'Continuar',
-            'success'
+                'Cliente Creado Con Exito!!!',
+                'Continuar',
+                'success'
             )
-        
         @endif
     </script>
 @stop

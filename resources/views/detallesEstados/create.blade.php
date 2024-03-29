@@ -22,9 +22,9 @@
 
                 @php
                     date_default_timezone_set('America/bogota');
-                    
+
                     $hora = date('Y-m-d H:i');
-                    
+
                 @endphp
 
                 <div class="form-group">
@@ -70,7 +70,7 @@
 
                             {{-- prueba --}}
                             @php
-                                
+
                                 /* echo  var_dump($facturas ?? '');  */
                             @endphp
                         </div>
@@ -83,26 +83,26 @@
 
 
                         <!--div del estado
-                                
-                                ojo.... pendiente
-
-                                
-                            <div class="form-group  col-6">
-
-                                <label for="" class="form-label col-12">Estado:</label>
-
-                                <select class="form-control form-control-lg " name=" empleados_id" id="empleados_id" required>
-                                    <option value="">Seleccione El Estado</option>
                                     
-                                    @foreach ($empleados as $empleado)
-                                        <option value=" {{ $empleado->id ?? '' }} "> {{ $empleado->nombre_empleado ?? '' }}
-                                        </option>
-                                    @endforeach
-                                    
-                                </select>
+                                    ojo.... pendiente
 
-                            </div>
-                            -->
+                                    
+                                <div class="form-group  col-6">
+
+                                    <label for="" class="form-label col-12">Estado:</label>
+
+                                    <select class="form-control form-control-lg " name=" empleados_id" id="empleados_id" required>
+                                        <option value="">Seleccione El Estado</option>
+                                        
+                                        @foreach ($empleados as $empleado)
+    <option value=" {{ $empleado->id ?? '' }} "> {{ $empleado->nombre_empleado ?? '' }}
+                                            </option>
+    @endforeach
+                                        
+                                    </select>
+
+                                </div>
+                                -->
 
 
 
@@ -111,7 +111,7 @@
 
                             <label for="" class="form-label col-12">Detalle:</label>
                             <input type="text" class="form-control form-control-lg" name="detalle_cuaderno_pago"
-                             id="detalle_cuaderno_pago" placeholder="Escriba el detalle">
+                                id="detalle_cuaderno_pago" placeholder="Escriba el detalle">
 
 
                         </div>
@@ -140,8 +140,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 
 @stop

@@ -25,33 +25,30 @@
         </thead>
 
         <tbody>
-            @foreach($lista_cuaderno as $cuaderno )
-            <tr>
-                <td>{{ $cuaderno->fecha_cuaderno_pago}}</td>
-                <td>{{ $cuaderno->nombre_empleado }}</td>
-                <td>{{ $cuaderno->id}}</td>
-                <td>{{ $cuaderno->nombre_cliente }}</td>  
-                <td>{{ $cuaderno->precio_factura }}</td>             
-                
-            </tr>
-              
+            @foreach ($lista_cuaderno as $cuaderno)
+                <tr>
+                    <td>{{ $cuaderno->fecha_cuaderno_pago }}</td>
+                    <td>{{ $cuaderno->nombre_empleado }}</td>
+                    <td>{{ $cuaderno->id }}</td>
+                    <td>{{ $cuaderno->nombre_cliente }}</td>
+                    <td>{{ $cuaderno->precio_factura }}</td>
+
+                </tr>
             @endforeach
 
         </tbody>
 
-        
-            
-            
+
+
+
 
     </table>
-   
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
-
 @stop
 
 @section('js')
@@ -68,9 +65,9 @@
     <script>
         @if (session('_ok') == 'ok')
             Swal.fire(
-            'Agregado Con Exito!!!',
-            'Continuar',
-            'success'
+                'Agregado Con Exito!!!',
+                'Continuar',
+                'success'
             )
         @endif
     </script>

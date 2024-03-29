@@ -21,7 +21,7 @@
 
                 <thead class="thead-striped ">
                     <tr>
-                        
+
                         <th>Telefono</th>
                         <th>Nombre</th>
                         <th>Direccion</th>
@@ -33,7 +33,7 @@
                 <tbody>
                     @foreach ($empleados as $empleado)
                         <tr>
-                          
+
                             <td>{{ $empleado->telefono_empleado }}</td>
                             <td>{{ $empleado->nombre_empleado }}</td>
                             <td>{{ $empleado->direccion_empleado }}</td>
@@ -48,18 +48,18 @@
                                     </a>
                                     <!--
 
-    <p>||</p>
+            <p>||</p>
 
-    <form action="{{ url('/empleados/' . $empleado->id) }}" method="post"
-                                            class="formularioEliminar">
-                                            @csrf
-                                            {{ method_field('DELETE') }}
+            <form action="{{ url('/empleados/' . $empleado->id) }}" method="post"
+                                                    class="formularioEliminar">
+                                                    @csrf
+                                                    {{ method_field('DELETE') }}
 
-                                            <input class="btn btn-danger" type="submit" value="Borrar">
+                                                    <input class="btn btn-danger" type="submit" value="Borrar">
 
 
-                                        </form>
-    -->
+                                                </form>
+            -->
 
 
 
@@ -85,8 +85,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 
 @stop

@@ -33,7 +33,7 @@
 
                 <div class="form-group row mb-0">
 
-                   
+
 
                     <div class="mb-6 col-6">
                         <label for="" class="form-label">Codigo Empleado:</label>
@@ -41,9 +41,9 @@
                             <option value="">Seleccione Empleado</option>
 
                             @foreach ($lista_empleados as $empleado)
-                                <option value="{{ $empleado->id }}"> {{ $empleado->telefono_empleado }} {{ $empleado->nombre_empleado }}
+                                <option value="{{ $empleado->id }}"> {{ $empleado->telefono_empleado }}
+                                    {{ $empleado->nombre_empleado }}
                                 </option>
-                              
                             @endforeach
                         </select>
 
@@ -59,8 +59,8 @@
 
                     <div class="mb-6 col-6">
                         <label for="" class="form-label">Precio: </label>
-                        <input type="number" class="form-control form-control-lg" name="precio_prestamo" id="precio_prestamo"
-                            placeholder="Ingrese el valor prestado" value="" required>
+                        <input type="number" class="form-control form-control-lg" name="precio_prestamo"
+                            id="precio_prestamo" placeholder="Ingrese el valor prestado" value="" required>
                         @error('precio')
                             <br>
                             <small> *{{ $message }}</small>
@@ -73,8 +73,8 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Description: </label>
-                    <input type="textarea" class="form-control form-control-lg" name="descripcion_prestamo" id="descripcion_prestamo"
-                        placeholder="Describa el motivo del prestamo" value="" required>
+                    <input type="textarea" class="form-control form-control-lg" name="descripcion_prestamo"
+                        id="descripcion_prestamo" placeholder="Describa el motivo del prestamo" value="" required>
                     @error('descripcion')
                         <br>
                         <small> *{{ $message }}</small>
@@ -110,7 +110,8 @@
 
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 @stop
 
 @section('js')
@@ -119,14 +120,12 @@
 
     <script>
         @if (session('eliminar') == 'ok')
-        
+
             Swal.fire(
-            'Borrado!',
-            'El cliente fue borrado :( ',
-            'success'
+                'Borrado!',
+                'El cliente fue borrado :( ',
+                'success'
             )
-        
-        
         @endif
 
 

@@ -23,7 +23,7 @@
 
 
                 <div class="form-group">
-                    
+
                     <div class="form-group row mb-1">
 
                         <div class="form-group col-6">
@@ -31,7 +31,7 @@
                             <label for="" class="form-label col-6">Numero Factura: </label>
                             <select class="form-control form-control-lg " name=" facturas_id" id="facturas_id" required>
                                 <option value="">Seleccione # La Factura</option>
-                                @foreach ($facturas as $factura )
+                                @foreach ($facturas as $factura)
                                     <option value=" {{ $factura->id ?? '' }} "> {{ $factura->id ?? '' }}
                                         {{ $factura->nombre_cliente ?? '' }} </option>
                                 @endforeach
@@ -40,9 +40,9 @@
                         </div>
                         <div class="form-group col-6">
 
-                            <label for="" class="form-label col-6">Estado: </label>                           
+                            <label for="" class="form-label col-6">Estado: </label>
 
-                                <select class="form-control form-control-lg " name=" estados_id" id="estados_id" required>
+                            <select class="form-control form-control-lg " name=" estados_id" id="estados_id" required>
                                 <option value="">Seleccione # El Estado</option>
                                 @foreach ($estados as $estado)
                                     <option value=" {{ $estado->id ?? '' }} "> {{ $estado->estado ?? '' }}</option>
@@ -75,8 +75,8 @@
     </div>
 
 
-<!-- -->
- <table class="table table-striped ">
+    <!-- -->
+    <table class="table table-striped ">
 
         <thead class="thead-striped ">
             <tr>
@@ -86,24 +86,23 @@
                 <th>precio</th>
                 <th>Abono</th>
                 <th>Estado</th>
-                
+
             </tr>
         </thead>
 
         <tbody>
 
-            @foreach($todasLasacturas as $registros)
-            <tr>
-                <td>{{$registros->fecha ?? ''}}</td>
-                <td>{{$registros->id ?? ''}}</td>
-                <td>{{$registros->nombre_cliente ?? ''}}</td>
-                <td>{{$registros->precio_factura ?? ''}}</td>
-                <td>{{$registros->abono_factura ?? ''}}</td>
-                <td>{{$registros->estado ?? ''}}</td>
-                
+            @foreach ($todasLasacturas as $registros)
+                <tr>
+                    <td>{{ $registros->fecha ?? '' }}</td>
+                    <td>{{ $registros->id ?? '' }}</td>
+                    <td>{{ $registros->nombre_cliente ?? '' }}</td>
+                    <td>{{ $registros->precio_factura ?? '' }}</td>
+                    <td>{{ $registros->abono_factura ?? '' }}</td>
+                    <td>{{ $registros->estado ?? '' }}</td>
 
-            </tr>
 
+                </tr>
             @endforeach
         </tbody>
 
@@ -116,8 +115,7 @@
 
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 
 @stop
