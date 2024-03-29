@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/admin_custom.css">
 
     <link rel="stylesheet" href="{{ asset('/vendor/jquery-ui/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
 @stop
 
 
@@ -16,24 +17,123 @@
     <div class="card">
         <div class="card-body">
 
-            <a href="{{ url('/facturas') }}" class="btn btn-info m-2">Total Facturas Del Dia</a>
-            <a href="{{ url('/clientes/create') }}" class="btn btn-info m-2">Agregar Cliente Nuevo</a>
-            <div class="card-body">
+            <div class="form-group row mb-0">
+
+                <div class="mb-6 col-3">
+
+                    <a href="{{ url('/facturas') }}" class="btn btn-info m-2">Total Facturas Del Dia</a>
+                    {{--  <a href="{{ url('/clientes/create') }}" class="btn btn-info m-2">Agregar Cliente Nuevo</a> --}}
+
+                </div>
+
+                <div class="mb-6 col-3">
+
+                    <form action="{{ url('/clientes') }}" method="post">
 
 
 
-                @foreach ($numeroFactura as $num)
-                    <h3>Proximo Codigo
-                        <b>
-                            {{ $num->cantidad + 1 }}
-                        </b>
-                    </h3>
-                @endforeach
+
+
+                        @csrf
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- cabecera del modal -->
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Datos Del Cliente</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <!-- Cuerpo del modal -->
+                                    <div class="modal-body">
+
+                                        <div class="form-row">
+
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Telefono: </label>
+                                                <input type="number" class="form-control form-control-lg"
+                                                    name="telefono_cliente" id="telefono_cliente"
+                                                    placeholder="Ingrese el numero telefonico" required>
+
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Nombre: </label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="nombre_cliente" id="nombre_cliente"
+                                                    placeholder="Ingrese el nombre" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Direccion: </label>
+                                                <input type="text" class="form-control form-control-lg"
+                                                    name="direccion_cliente" id="direccion_cliente"
+                                                    placeholder="Ingrese la direccion">
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Pie/Footer del modal -->
+                                    <div class="modal-footer">
+
+
+                                        <div class="col-12 mb-12">
+                                            <input type="submit" class="form-control form-control-lg btn btn-primary"
+                                                value="Guardar">
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-info m-2" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Agregar Cliente Nuevo
+                        </button>
+
+                        {{-- mostramos si ya se agrego el numero de telefono y lo mostramos en una caja  --}}
+                        @if ($errors->any())
+
+                            <div class="alert alert-danger">
+
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li> {{ $error }}</li>
+                                    @endforeach
+                                </ul>
+
+                            </div>
+                        @endif
+
+
+                    </form>
+                </div>
+
+
+
+                <div class="card-body">
+                    @foreach ($numeroFactura as $num)
+                        <h3>Proximo Codigo
+                            <b>
+                                {{ $num->cantidad + 1 }}
+                            </b>
+                        </h3>
+                    @endforeach
+                </div>
 
 
             </div>
-
-
         </div>
     </div>
 
@@ -61,7 +161,7 @@
 
                         <input type="hidden" id="clientes_id" name="clientes_id"class="form-control form-control-lg"
                             required>
-                        <input type="text" id="nombre_cliente" class="form-control form-control-lg"
+                        <input type="text" id="nombre" class="form-control form-control-lg"
                             placeholder="Ingrese nombre del cliente">
 
 
@@ -75,8 +175,8 @@
                     </div>
 
                     <div class="mb-3 col-3">
-                        <label for="telefono_cliente" class="form-label">Telefono del Cliente</label>
-                        <input type="text" id="telefono_cliente" class="form-control form-control-lg" readonly>
+                        <label for="telefono" class="form-label">Telefono del Cliente</label>
+                        <input type="text" id="telefono" class="form-control form-control-lg" readonly>
 
                     </div>
 
@@ -121,8 +221,8 @@
 
                     <div class="mb-3 col-3">
                         <label for="" class="form-label">Precio: </label>
-                        <input type="number" class="form-control form-control-lg" name="precio_factura" id="precio_factura"
-                            placeholder="Ingrese el precio total" value="" required>
+                        <input type="number" class="form-control form-control-lg" name="precio_factura"
+                            id="precio_factura" placeholder="Ingrese el precio total" value="" required>
                         @error('precio_factura')
                             <br>
                             <small class="alert-danger"> *{{ $message }}</small>
@@ -132,8 +232,8 @@
 
                     <div class="mb-3 col-3">
                         <label for="" class="form-label">Abono: </label>
-                        <input type="number" class="form-control form-control-lg" name="abono_factura" id="abono_factura"
-                            placeholder="Ingrese el abono" value="" required>
+                        <input type="number" class="form-control form-control-lg" name="abono_factura"
+                            id="abono_factura" placeholder="Ingrese el abono" value="" required>
                         @error('abono_factura')
                             <br>
                             <small class="alert-danger"> *{{ $message }}</small>
@@ -197,6 +297,7 @@
 
     <script src="{{ asset('/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 
     <script>
@@ -210,9 +311,20 @@
         @endif
     </script>
 
+    <script>
+        @if (session('cliente_ok') == 'ok')
+
+            Swal.fire(
+                'Cliente Creado Con Exito!!!',
+                'Continuar',
+                'success'
+            )
+        @endif
+    </script>
+
 
     <script>
-        $('#nombre_cliente').autocomplete({
+        $('#nombre').autocomplete({
             source: function(request, response) {
                 $.ajax({
                     url: "{{ route('consultaClientes') }}",
@@ -236,7 +348,7 @@
                 // Asignar el ID del cliente al campo oculto
                 $('#clientes_id').val(ui.item.id);
                 // Agrega más campos según sea necesario
-                $('#telefono_cliente').val(ui.item.telefono_cliente);
+                $('#telefono').val(ui.item.telefono);
             }
         });
 

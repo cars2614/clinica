@@ -77,7 +77,8 @@ class ClientesController extends Controller
         Clientes::insert($datosClientes);
 
         /* return response()->json($datosClientes); */
-        return redirect('/clientes/')->with('cliente_ok','ok');
+       // return redirect('/clientes/')->with('cliente_ok','ok');
+       return redirect('/facturas/create/')->with('cliente_ok', 'ok');
     }
 
 

@@ -76,7 +76,7 @@ class FacturasController extends Controller
             $data[] = [
 
                 'label' => $cliente->nombre_cliente,
-                'telefono_cliente' => $cliente->telefono_cliente,
+                'telefono' => $cliente->telefono_cliente,
                 'id' => $cliente->id
 
             ];
