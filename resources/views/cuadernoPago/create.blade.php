@@ -2,6 +2,19 @@
 
 @section('title', 'Cuaderno Empleado Crear')
 
+@section('css')
+
+    {{-- validacion formulario duplicado --}}
+    <link rel="stylesheet" href="{{ asset('/vendor/css/formularioDuplicado.css/') }}">
+
+    <link rel="stylesheet" href="/css/admin_custom.css">
+
+    <link rel="stylesheet" href="{{ asset('/vendor/jquery-ui/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
+
+
+@stop
+
 @section('content_header')
     <h2>Cuaderno Empleado</h2>
     <a href="{{ url('/cuadernoPago/') }}" class="btn btn-info m-2">Todos Los Registro</a>
@@ -16,7 +29,7 @@
         {{-- caja  --}}
         <div class="col-md-12">
 
-            <form action=" {{ url('/cuadernoPago') }}" method="post">
+            <form action=" {{ url('/cuadernoPago') }}" method="post" class="formularioDuplicado">
 
                 @csrf
 
@@ -96,7 +109,7 @@
                     </div>
 
                     <div class="form-group row mb-0">
-                        <input type="submit" class="btn btn-primary col-12" value="Guardar">
+                        <input type="submit" class="btn btn-primary col-12 botonDuplicado" value="Guardar">
 
                     </div>
 
@@ -128,6 +141,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('/vendor/js/formularioDuplicado.js') }}"></script>
 
     <script>
         $('#clientes').DataTable();

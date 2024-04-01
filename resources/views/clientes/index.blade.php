@@ -52,18 +52,18 @@
                                         Editar
                                     </a>
                                     <!--
-                                            <p>||</p>
+                                                            <p>||</p>
 
-                                            <form action="{{ url('/clientes/' . $cliente->id) }}" method="post"
-                                                class="formularioEliminar">
-                                                @csrf
-                                                {{ method_field('DELETE') }}
+                                                            <form action="{{ url('/clientes/' . $cliente->id) }}" method="post"
+                                                                class="formularioEliminar">
+                                                                @csrf
+                                                                {{ method_field('DELETE') }}
 
-                                                <input class="btn btn-danger" type="submit" value="Borrar">
+                                                                <input class="btn btn-danger" type="submit" value="Borrar">
 
 
-                                            </form>
-                                            -->
+                                                            </form>
+                                                            -->
 
 
                                 </div>
@@ -83,6 +83,8 @@
 @stop
 
 @section('css')
+
+
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 

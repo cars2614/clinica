@@ -112,11 +112,15 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+
+    {{-- validacion formulario duplicado --}}
+    <link rel="stylesheet" href="{{ asset('/vendor/css/formularioDuplicado.css/') }}">
 @stop
 
 @section('js')
 
     <link rel="stylesheet" href="../../js/formularios/validacionPrestamos.js">
+    <script src="{{ asset('/vendor/js/formularioDuplicado.js') }}"></script>
 
     <script>
         @if (session('eliminar') == 'ok')

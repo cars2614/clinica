@@ -5,10 +5,16 @@
 
 
 @section('css')
+
+    {{-- validacion formulario duplicado --}}
+    <link rel="stylesheet" href="{{ asset('/vendor/css/formularioDuplicado.css/') }}">
+    
     <link rel="stylesheet" href="/css/admin_custom.css">
 
     <link rel="stylesheet" href="{{ asset('/vendor/jquery-ui/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
+
+
 @stop
 
 
@@ -28,11 +34,7 @@
 
                 <div class="mb-6 col-3">
 
-                    <form action="{{ url('/clientes') }}" method="post">
-
-
-
-
+                    <form action="{{ url('/clientes') }}" method="post" class="formularioDuplicado">
 
                         @csrf
                         <!-- Modal -->
@@ -43,7 +45,8 @@
 
                                     <!-- cabecera del modal -->
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Datos Del Cliente</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese Los Datos Del Cliente
+                                            Nuevo</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -54,7 +57,7 @@
                                         <div class="form-row">
 
 
-                                            <div class="mb-3">
+                                            <div class="mb-3 col-12">
                                                 <label for="" class="form-label">Telefono: </label>
                                                 <input type="number" class="form-control form-control-lg"
                                                     name="telefono_cliente" id="telefono_cliente"
@@ -62,14 +65,14 @@
 
                                             </div>
 
-                                            <div class="mb-3">
+                                            <div class="mb-3 col-12">
                                                 <label for="" class="form-label">Nombre: </label>
                                                 <input type="text" class="form-control form-control-lg"
                                                     name="nombre_cliente" id="nombre_cliente"
                                                     placeholder="Ingrese el nombre" required>
                                             </div>
 
-                                            <div class="mb-3">
+                                            <div class="mb-3 col-12">
                                                 <label for="" class="form-label">Direccion: </label>
                                                 <input type="text" class="form-control form-control-lg"
                                                     name="direccion_cliente" id="direccion_cliente"
@@ -85,7 +88,8 @@
 
 
                                         <div class="col-12 mb-12">
-                                            <input type="submit" class="form-control form-control-lg btn btn-primary"
+                                            <input type="submit"
+                                                class="form-control form-control-lg btn btn-primary botonDuplicado"
                                                 value="Guardar">
                                         </div>
 
@@ -148,7 +152,7 @@
 
             {{-- FORMULARIO DE INGRESO DE PRENDAS --}}
 
-            <form action=" {{ url('/facturas') }}" method="post">
+            <form action=" {{ url('/facturas') }}" method="post" class="formularioDuplicado">
 
                 <!--llave de seguridad... sin esta el fomulario no se envia-->
                 @csrf
@@ -268,7 +272,17 @@
                 </div>
 
                 <div class="mb-3">
-                    <input type="submit" class="form-control form-control-lg btn btn-primary" value="Guardar">
+
+                    <button type="submit" class="form-control form-control-lg btn btn-primary botonDuplicado">
+                        Guardar Registro
+                        <i class="spinner fas fa-spinner fa-spin"></i>
+                    </button>
+
+
+                    {{--   <i class="spinner fas fa-spinner fa-spin">
+                        <input type="submit" class="form-control form-control-lg btn btn-primary botonDuplicado "
+                            value="Guardar">
+                    </i> --}}
                 </div>
 
 
@@ -298,6 +312,7 @@
     <script src="{{ asset('/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('/vendor/js/formularioDuplicado.js') }}"></script>
 
 
     <script>
