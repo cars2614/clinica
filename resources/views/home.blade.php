@@ -57,7 +57,7 @@
 
                         <i class="fas fa-user-check"></i>
                     </div>
-                    <a href="{{ url('/facturas/create') }}" class="card-category text-dark font-weight-bold">
+                    <a href="{{ url('/clientes') }}" class="card-category text-dark font-weight-bold">
                         Totos Nuestros Clientes
                     </a>
 
@@ -91,7 +91,7 @@
 
                         <i class="fas fa-id-card-alt"></i>
                     </div>
-                    <a href="{{ url('/facturas/create') }}" class="card-category text-dark font-weight-bold">
+                    <a href="{{ url('/empleados') }}" class="card-category text-dark font-weight-bold">
                         Totos Nuestros Empleados
                     </a>
 
@@ -133,13 +133,13 @@
 @section('js')
     <script>
         /* 
-                                                          se comenta para que no salga la alerta al inicio
-                                                          solo es una prueba de que funciona bien       
-                                                            Swal.fire(
-                                                                'Bienvenid@!',
-                                                                'Ejemplo alert2!',
-                                                                'success'
-                                                            ) */
+                                                                  se comenta para que no salga la alerta al inicio
+                                                                  solo es una prueba de que funciona bien       
+                                                                    Swal.fire(
+                                                                        'Bienvenid@!',
+                                                                        'Ejemplo alert2!',
+                                                                        'success'
+                                                                    ) */
     </script>
 @stop
 
