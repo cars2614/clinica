@@ -15,7 +15,7 @@
 
     <div class="row">
         {{-- Tarjeta Registros --}}
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header card-header-econdary card-header-icon">
                     <div class="card-icon">
@@ -49,7 +49,7 @@
 
 
         {{-- Tarjeta Clientes --}}
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header card-header-econdary card-header-icon">
                     <div class="card-icon">
@@ -83,7 +83,7 @@
 
 
         {{-- Tarjeta Empleados --}}
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header card-header-econdary card-header-icon">
                     <div class="card-icon">
