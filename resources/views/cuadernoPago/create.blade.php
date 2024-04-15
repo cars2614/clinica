@@ -54,7 +54,7 @@
                         </div>
 
 
-                        <div class="form-group col-6">
+                        <div class="form-group col-4">
                             <label for="" class="form-label col-12">Nombre Empleado:</label>
 
                             <select class="form-control form-control-lg " name=" empleados_id" id="empleados_id" required>
@@ -69,7 +69,7 @@
                         </div>
 
 
-                        <div class="form-group  col-6">
+                        <div class="form-group  col-8">
                             <label for="" class="form-label col-12">Codigo Factura"Cuaderno":</label>
 
                             <select class="form-control form-control-lg " name=" facturas_id" id="facturas_id" required>
@@ -77,9 +77,10 @@
                                 @foreach ($facturas as $factura)
                                     <option value=" {{ $factura->id ?? '' }} ">
                                         {{ $factura->id ?? '' }}
-                                        |*|{{ $factura->nombre_cliente ?? '' }}
-                                        |*|{{ $factura->estado ?? '' }}
-                                        |*|{{ $factura->fecha ?? '' }} </option>
+                                        | {{ $factura->nombre_cliente ?? '' }}
+                                        | Precio {{ $factura->precio_factura ?? '' }}
+                                        | Estado {{ $factura->estado ?? '' }}
+                                        | Fecha Ingreso {{ $factura->fecha ?? '' }} </option>
                                 @endforeach
                             </select>
 

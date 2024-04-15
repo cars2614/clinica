@@ -24,7 +24,7 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <a href="{{ url('/facturas/create') }}" class="card-category text-dark font-weight-bold">
-                        Totos Nuestros Registros
+                        Todos Nuestros Registros
                     </a>
 
                     <h2>
@@ -58,7 +58,7 @@
                         <i class="fas fa-user-check"></i>
                     </div>
                     <a href="{{ url('/clientes') }}" class="card-category text-dark font-weight-bold">
-                        Totos Nuestros Clientes
+                        Todos Nuestros Clientes
                     </a>
 
                     <h2>
@@ -92,7 +92,7 @@
                         <i class="fas fa-id-card-alt"></i>
                     </div>
                     <a href="{{ url('/empleados') }}" class="card-category text-dark font-weight-bold">
-                        Totos Nuestros Empleados
+                        Todos Nuestros Empleados
                     </a>
 
                     <h2>

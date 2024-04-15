@@ -25,7 +25,7 @@ class CuadernoPagoController extends Controller
     public function index(Request $request)
     {
         //funciona correcto; pero se puede mejorar
-       // $datosCuadernoPago['cuadernoPago'] = CuadernoPago::paginate(10000);
+        // $datosCuadernoPago['cuadernoPago'] = CuadernoPago::paginate(10000);
         //return view('cuadernoPago.index',$datosCuadernoPago);
 
         /*
@@ -40,13 +40,13 @@ class CuadernoPagoController extends Controller
         INNER JOIN clientes ON facturas.clientes_id = clientes.id  
         ORDER BY fecha_cuaderno_pago DESC');
 
-        $datosCuadernoPago = array('lista_cuaderno'=>$CuadernoPago);
+        $datosCuadernoPago = array('lista_cuaderno' => $CuadernoPago);
 
-        return response()->view('cuadernoPago/index', $datosCuadernoPago );
+        return response()->view('cuadernoPago/index', $datosCuadernoPago);
 
         //return view('cuadernoPago.index',$datosCuadernoPago);
 
-        
+
 
     }
 
@@ -65,8 +65,9 @@ class CuadernoPagoController extends Controller
         /* Se hace la consulta para que aparezcan solo los pendientes */
 
         //la consulta si funciona
-        
-        $factura = DB::select('SELECT facturas.id, clientes.nombre_cliente, detalles_estados.facturas_id, estados.estado, detalles_estados.fecha
+
+        $factura = DB::select('SELECT facturas.id, clientes.nombre_cliente, detalles_estados.facturas_id, 
+                                        facturas.precio_factura, estados.estado, detalles_estados.fecha
             FROM detalles_estados
             INNER JOIN estados ON detalles_estados.estados_id = estados.id
             INNER JOIN facturas ON detalles_estados.facturas_id = facturas.id
@@ -78,13 +79,11 @@ class CuadernoPagoController extends Controller
                 INNER JOIN estados as e2 ON de2.estados_id = e2.id
                 WHERE de2.facturas_id = facturas.id
                 AND e2.id > 1
-  )
-                GROUP BY facturas.id, clientes.nombre_cliente, detalles_estados.facturas_id, estados.estado, detalles_estados.fecha;'); 
+                )
+                GROUP BY facturas.id, clientes.nombre_cliente, facturas.precio_factura, detalles_estados.facturas_id, estados.estado, detalles_estados.fecha;');
+        //dd($factura);
 
-
-        return response()->view('cuadernoPago.create', ['empleados' => $empleado, 'facturas' => $factura] );
-        
-      
+        return response()->view('cuadernoPago.create', ['empleados' => $empleado, 'facturas' => $factura]);
     }
 
     /**
@@ -108,11 +107,9 @@ class CuadernoPagoController extends Controller
 
         //validaremos e ingresaremos los registros  
         $datosCuadernoPago = request()->except('_token');
-        
+
         CuadernoPago::insert($datosCuadernoPago);
         return redirect('/cuadernoPago/create')->with('cuaderno_pago_ok', 'ok');
-
-        
     }
 
     /**
