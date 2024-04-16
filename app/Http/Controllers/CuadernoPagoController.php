@@ -58,7 +58,8 @@ class CuadernoPagoController extends Controller
     public function create()
     {
         //EMPLEADO
-        $empleado = Empleado::all();
+        //$empleado = Empleado::all();
+        $empleado = DB::select('SELECT * FROM empleados WHERE estado_empleado = "activo" ');
         $datosEmpleados = array("lista_empleados" => $empleado);
 
         //CODIGO FACTURA 

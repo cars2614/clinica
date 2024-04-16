@@ -46,7 +46,7 @@ class FacturasController extends Controller
 
         //$lista_clientes = DB::select('SELECT * FROM clientes');
 
-        $lista_empleados = DB::select('SELECT * FROM empleados');
+        $lista_empleados = DB::select('SELECT * FROM empleados WHERE estado_empleado = "activo"');
 
         $numeroFactura = DB::select('SELECT COUNT(*)AS cantidad FROM facturas');
 

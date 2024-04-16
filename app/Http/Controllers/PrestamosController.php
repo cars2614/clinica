@@ -39,7 +39,7 @@ class PrestamosController extends Controller
     public function create()
     {
         //
-        $empleado = Empleado::all();
+        $empleado = DB::select('SELECT * FROM empleados WHERE estado_empleado = "activo" ');
         $datos = array("lista_empleados" => $empleado);
 
         return response()->view("prestamos/create", $datos, 200);

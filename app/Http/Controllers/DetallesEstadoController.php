@@ -32,11 +32,8 @@ class DetallesEstadoController extends Controller
         );
 
         $estado = DB::select(
-            'SELECT estados.id, estados.estado 
-        FROM estados
-        INNER JOIN detalles_estados
-        ON detalles_estados.id = estados.id
-        WHERE estados.id >= 3 ' );
+            'SELECT estados.id, estados.estado FROM estados
+                WHERE estados.id >2  ' );
 
         $todasLasacturas = DB::select('SELECT d_e.fecha, f.id, c.nombre_cliente, f.precio_factura, f.abono_factura, 	           e.estado    
         FROM facturas f         

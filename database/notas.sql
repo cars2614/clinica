@@ -32,7 +32,11 @@ DELIMITER ;
 //-- EN PROCESO
 
 **************************************************************************************
+/* php artisan migrate:refresh  "elimina y vuelve a crear todas las tablas".   
 
+php artisan db:seed // ingreso de registros previamente creados en databases/seeders/
+
+ */
 
 
 

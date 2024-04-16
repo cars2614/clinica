@@ -19,6 +19,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('telefono_empleado')->unique();
             $table->string('nombre_empleado');
             $table->string('direccion_empleado')->nullable();
+            $table->string('estado_empleado')->default('activo')->nullable();
             
             $table->timestamps();
         });
